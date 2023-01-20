@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for f in *mp4
+do 
+ echo "<embed src=\"{{path}}$f\" autostart=\"false\" height=\"600\" width=\"800\" /></embed>"
+done

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <h2>SERVER 2</h2>
+	<h2>{{user_image}}</h2>
+
+</head>
+<body>
+	<embed src="{{path}}2tzw1eEFIU2kReYq.mp4" autostart="false" height="600" width="800" /></embed>
+<embed src="{{path}}3Ep7X00I3q74ucaL.mp4" autostart="false" height="600" width="800" /></embed>
+<embed src="{{path}}9FZKrsKqrlCD3GCE.mp4" autostart="false" height="600" width="800" /></embed>
+<embed src="{{path}}CkHZxZZQFqwnZZcr.mp4" autostart="false" height="600" width="800" /></embed>
+<embed src="{{path}}PFue0LMbGl2_FrVw.mp4" autostart="false" height="600" width="800" /></embed>
+<embed src="{{path}}Y_FelZPTiYAkR4dM.mp4" autostart="false" height="600" width="800" /></embed>
+<embed src="{{path}}bu56Nfg1-ruinQ1O.mp4" autostart="false" height="600" width="800" /></embed>
+<embed src="{{path}}yJabzPYBWliy-vb8.mp4" autostart="false" height="600" width="800" /></embed>
+	<!-- works server if add static then doesnt work -->
+    <img src="{{path}}{{ user_image }}" alt="User Image 2"> 
+	<img src='{{path}}{{ user_image }}' alt='full path inc static 3'> 
+	<p><img src="{{url_for('static', filename='{{user_image}}')}}"  alt='User Image 6'></p> 
+</body>
+</html>
