@@ -72,6 +72,41 @@ def gen_possibles(mask, nots):
 
     return word5
 
+def genmask(green,yellow,nots):
+    ret=""
+    if green == "":
+        if len(yellow)>0:
+            ret="[^"+yellow+"]"
+        else:
+            ret=nots
+    else:
+        ret=green
+    return ret
+
+def gen_possibles_extra(c1,c2,c3,c4,c5,y1,y2,y3,y4,y5,nots):
+    if len(nots) == 0:
+        nots_bracket = "."
+    else:
+        nots_bracket = "[^"+nots+"]"
+    newmask = ""
+
+    newmask += genmask(c1,y1,nots_bracket)
+    newmask += genmask(c2,y2,nots_bracket)
+    newmask += genmask(c3,y3,nots_bracket)
+    newmask += genmask(c4,y4,nots_bracket)
+    newmask += genmask(c5,y5,nots_bracket)
+
+    print("generated mask:"+newmask)
+    r = re.compile('^' + newmask + '$')
+    fp = open('lower-only', 'r')
+    wtmp = fp.read()
+    words = wtmp.split('\n')
+    word5 = list(filter(r.match, words))
+    print('words list len '+str(len(words)))
+    print('possibles list len '+str(len(word5)))
+
+    return word5
+
 
 def main_test():
     mask = '.....'
@@ -209,10 +244,13 @@ def data():
     if request.method == 'POST':
         form_data = request.form
         #calling render with ImmutableMultiDict([('c1', 'r'), ('c2', 'a'), ('c3', 'm')])
-        poss = gen_possibles(form_data['c1']+ form_data['c2']+ form_data['c3']+ form_data['c4']+ form_data['c5'], form_data['nn'])
+        #poss = gen_possibles(form_data['c1']+ form_data['c2']+ form_data['c3']+ form_data['c4']+ form_data['c5'], form_data['nn'])
+        poss = gen_possibles_extra(form_data['c1'], form_data['c2'], form_data['c3'], form_data['c4'], form_data['c5'],
+                                   form_data['y1'], form_data['y2'], form_data['y3'], form_data['y4'], form_data['y5'], form_data['nn'])
         #print(f'got possibles {poss}')
         #print(f'calling render with {form_data}')
-        return render_template('data.html', form_data=form_data, words=poss)
+        xlen=len(poss)
+        return render_template('data.html', form_data=form_data, words=poss, xlen=xlen)
 
 if __name__ == "__main__":
     app.run()
